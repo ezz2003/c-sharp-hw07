@@ -45,7 +45,7 @@ void PrintMatrix(int[,] matrix)
 
 string SearchElement(int[,] matrix, int row, int column)
 {
-  if (row >= matrix.GetLongLength(0) |
+  if (row >= matrix.GetLength(0) |
       column >= matrix.GetLength(1) |
       row < 0 | column < 0)
   { return "Такого элемента в массиве нет"; }
