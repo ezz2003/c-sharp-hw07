@@ -24,7 +24,6 @@ int[,] MakeMatrixIntRnd(int rows, int columns, int min, int max)
       matrix[i, j] = rnd.Next(min, max + 1);
     }
   }
-
   return matrix;
 }
 
@@ -40,12 +39,31 @@ void PrintMatrix(int[,] matrix)
   }
 }
 
-double ArithmeticMeanColumns(int[,] matrix)
+double[] ArithmeticMeanColumns(int[,] matrix) // считает по колонкам ср. арифм. 
 {
+  double[] arrArithmMean = new double[matrix.GetLength(1)];
+  for (int j = 0; j < matrix.GetLength(1); j++)
+  {
+    double sum = 0;
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+      sum += matrix[i, j];
+    }
+    arrArithmMean[j] = Math.Round(sum / matrix.GetLength(0), 1);
+  }
+  return arrArithmMean;
+}
 
+string MakeStrPrintArr(double[] arr) // готовит строку для печати 1D
+{
+  string strPrn = string.Empty;
+  for (int i = 0; i < arr.Length; i++) strPrn += $"{arr[i],4} ";
+  return strPrn;
 }
 
 int rowsMatrix = InputInt("Введите количество строк в матрице");
 int columnsMatrix = InputInt("Введите количество столбцов в матрице");
 int[,] readyMatrix = MakeMatrixIntRnd(rowsMatrix, columnsMatrix, 1, 10);
 PrintMatrix(readyMatrix);
+Console.WriteLine($"Среднее арифметическое матрицы по столбцам: {MakeStrPrintArr(ArithmeticMeanColumns(readyMatrix))}");
+
